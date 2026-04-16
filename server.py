@@ -26,6 +26,7 @@ def get_language_headers(language: str) -> dict:
 @mcp.tool()
 async def get_war_status(language: Optional[str] = "en-US") -> dict:
     """Retrieve the current state of the galactic war in Helldivers 2, including overall war progress, active campaigns, and the current war season. Use this when the user wants a high-level overview of the ongoing war effort."""
+    _track("get_war_status")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -40,6 +41,7 @@ async def get_war_status(language: Optional[str] = "en-US") -> dict:
 @mcp.tool()
 async def get_planets(language: Optional[str] = "en-US") -> list:
     """Retrieve a list of all planets in the Helldivers 2 galaxy, including their liberation status, current owner faction, player counts, and ongoing campaigns. Use this when the user wants to browse or compare planets across the war map."""
+    _track("get_planets")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -54,6 +56,7 @@ async def get_planets(language: Optional[str] = "en-US") -> list:
 @mcp.tool()
 async def get_planet(planet_index: int, language: Optional[str] = "en-US") -> dict:
     """Retrieve detailed information about a specific planet in Helldivers 2, including its biome, hazards, liberation percentage, active campaigns, statistics, and controlling faction. Use this when the user asks about a particular named planet."""
+    _track("get_planet")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -68,6 +71,7 @@ async def get_planet(planet_index: int, language: Optional[str] = "en-US") -> di
 @mcp.tool()
 async def get_campaigns(language: Optional[str] = "en-US") -> list:
     """Retrieve all active campaigns (ongoing military operations) currently happening across the Helldivers 2 galaxy. Use this to find out which planets are currently being fought over, their liberation or defense progress, and how many Helldivers are participating."""
+    _track("get_campaigns")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -82,6 +86,7 @@ async def get_campaigns(language: Optional[str] = "en-US") -> list:
 @mcp.tool()
 async def get_assignments(language: Optional[str] = "en-US") -> list:
     """Retrieve the current Major Orders (assignments) issued by Super Earth High Command in Helldivers 2. These are the primary objectives the community should focus on, including task descriptions, rewards, and expiration times. Use this when the user asks about current major orders or what they should be doing."""
+    _track("get_assignments")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -96,6 +101,7 @@ async def get_assignments(language: Optional[str] = "en-US") -> list:
 @mcp.tool()
 async def get_dispatches(language: Optional[str] = "en-US") -> list:
     """Retrieve the latest dispatches (in-game news messages and announcements) from Super Earth High Command in Helldivers 2. These are narrative updates and lore messages sent to players. Use this when the user wants to read recent in-game news or story updates."""
+    _track("get_dispatches")
     headers = get_language_headers(language or "en-US")
     async with httpx.AsyncClient() as client:
         response = await client.get(
@@ -110,6 +116,7 @@ async def get_dispatches(language: Optional[str] = "en-US") -> list:
 @mcp.tool()
 async def get_steam_news(page: Optional[int] = 1) -> dict:
     """Retrieve the latest Steam news and patch notes for Helldivers 2. Use this when the user wants to know about recent game updates, patch notes, or official announcements posted on Steam."""
+    _track("get_steam_news")
     params = {}
     if page is not None and page > 1:
         params["page"] = page
@@ -126,6 +133,7 @@ async def get_steam_news(page: Optional[int] = 1) -> dict:
 
 @mcp.tool()
 async def get_war_history(
+    _track("get_war_history")
     planet_index: Optional[int] = None,
     language: Optional[str] = "en-US",
 ) -> dict:
